@@ -122,7 +122,6 @@ class HangmanGame : public Player{
 void HangmanGame::play(){
     while (!isGameOver()){
         clearScreen();
-        // cout << "secretWord = " << secretWord << endl;
         cout << "Name: " << name << endl;
         cout << "\nlives: " << lives << endl;
 
