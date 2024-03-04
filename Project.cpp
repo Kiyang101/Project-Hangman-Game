@@ -113,7 +113,7 @@ class HangmanGame : public Player{
         }
 
         void displayStickman(void){
-            cout << stickman[lives*2] << endl;
+            cout << stickman[lives] << endl;
         }
 
         void play();
