@@ -203,6 +203,8 @@ int main(){
         cin >> lives;
         if (lives > 6) {
             lives = 6;
+        }else if (lives < 1){
+            lives = 1;
         }
     }else{
         lives = 6;
