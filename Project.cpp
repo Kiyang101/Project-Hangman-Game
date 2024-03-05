@@ -22,19 +22,19 @@ class Word{
             words.push_back(word);
         }
 
-        vector<string> getWords(void){
+        vector<string> getWords(){
             return words;
         }
 
-        string getSecretWord(void){
+        string getSecretWord(){
             return secretWord;
         }
 
-        void getRandomWord(void);
+        void randomWord();
         
 };
 
-void Word::getRandomWord(void) {
+void Word::randomWord() {
     if (words.empty()){
         secretWord = "";
     }
@@ -87,7 +87,6 @@ class HangmanGame : public Player{
             }
         }
 
-
         bool isGameOver(){
             return lives == 0 || secretWord == string(guessedWord.begin(), guessedWord.end());
         }
@@ -112,8 +111,8 @@ class HangmanGame : public Player{
             stickman = stages;
         }
 
-        void displayStickman(void){
-            cout << stickman[lives*2] << endl;
+        void displayStickman(){
+            cout << stickman[lives] << endl;
         }
 
         void play();
@@ -122,9 +121,8 @@ class HangmanGame : public Player{
 void HangmanGame::play(){
     while (!isGameOver()){
         clearScreen();
-        // cout << "secretWord = " << secretWord << endl;
         cout << "Name: " << name << endl;
-        cout << "\nlives: " << lives << endl;
+        cout << "lives: " << lives << endl;
 
         displayStickman();
 
@@ -147,7 +145,8 @@ void HangmanGame::play(){
     }
 
     clearScreen();
-    cout << "\nYour lives: " << lives << endl;
+    cout << "Name: " << name << endl;
+    cout << "Your lives: " << lives << endl;
     displayStickman();
     cout << endl;
     for (char c : guessedWord){
@@ -159,12 +158,25 @@ void HangmanGame::play(){
         cout << "The correct word is '" << secretWord << "'" << endl;
     }
     else{
-        cout << "\n\nYou lose\nThe correct word is '" << secretWord << "'\n\n";
+        cout << "\n\n" << name << " You lose" << endl;
+        cout << "The correct word is '" << secretWord << "'\n\n";
     }
 }
 
 int main(){
     clearScreen();
+
+    string logo = R"(
+     _                                             
+    | |                                            
+    | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+    | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \
+    | | | | (_| | | | | (_| | | | | | | (_| | | | |
+    |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                        __/ |                      
+                       |____/    
+    )";
+
     Word word;
 
     ifstream secretWord("./secretWord.txt");
@@ -190,34 +202,52 @@ int main(){
         word.putWord(w);
     };
 
-    word.getRandomWord();   
+    secretWord.close();
+    Stickman.close();
+
+    cout << logo << endl;
+
+    cout << "Hangman Game \n-> setting\n" << endl;
+    
     string config;
     int lives;
-    cout << "Your default lives is 6 and it's can't set more 6" << endl;
-    cout << "You want to config your lives?(y/n): ";
-    
+    cout << "Your default lives is 6 and maximum lives is 6" << endl;
+    cout << "You want to config your lives?(Y/n): ";
     cin >> config;
 
     if (config[0] == 'y' || config[0] == 'Y') {
         cout << "Enter the number of lives: ";
         cin >> lives;
         if (lives > 6) {
-            lives = 6;
+                lives = 6;
+        }else if (lives < 1){
+            lives = 1;
         }
     }else{
         lives = 6;
     }
 
-    HangmanGame game(word.getSecretWord(), lives);
-
     string name;
     cout << "Input your name : ";
     cin >> name;
 
-    game.putName(name);
+    while (true){
+        word.randomWord();   
+        HangmanGame game(word.getSecretWord(), lives);
+        game.putName(name);
+        game.putState(stages);
+    
+        game.play();
 
-    game.putState(stages);
-    game.play();
+        string replay;
+        cout << "You want to play again?(Y/n): ";
+        cin >> replay;
 
+        if (replay[0] == 'y' || replay[0] == 'Y'){
+            continue;;
+        }else{
+            break;
+        }
+    }
     return 0;
 }
