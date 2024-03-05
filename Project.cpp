@@ -231,6 +231,7 @@ int main(){
     cout << "Input your name : ";
     cin >> name;
 
+
     while (true){
         word.randomWord();   
         HangmanGame game(word.getSecretWord(), lives);
@@ -249,5 +250,7 @@ int main(){
             break;
         }
     }
+    
+
     return 0;
 }
