@@ -155,11 +155,11 @@ void HangmanGame::play(){
 
     if (secretWord == string(guessedWord.begin(), guessedWord.end())){
         cout << "\n\nCongratulations "<< name << " Win!!\n\n";
-        cout << "The correct word is '" << secretWord << "'" << endl;
+        cout << "The correct word is '" << secretWord << "'\n" << endl;
     }
     else{
         cout << "\n\n" << name << " You lose" << endl;
-        cout << "The correct word is '" << secretWord << "'\n\n";
+        cout << "The correct word is '" << secretWord << "'\n" << endl;
     }
 }
 
@@ -211,20 +211,20 @@ int main(){
     
     string config;
     int lives;
-    cout << "Your default lives is 6 and maximum lives is 6" << endl;
+    cout << "Your default lives is 7 and maximum lives is 7" << endl;
     cout << "You want to config your lives?(Y/n): ";
     cin >> config;
 
     if (config[0] == 'y' || config[0] == 'Y') {
         cout << "Enter the number of lives: ";
         cin >> lives;
-        if (lives > 6) {
-                lives = 6;
+        if (lives > 7) {
+                lives = 7;
         }else if (lives < 1){
             lives = 1;
         }
     }else{
-        lives = 6;
+        lives = 7;
     }
 
     string name;
@@ -251,6 +251,5 @@ int main(){
         }
     }
     
-
     return 0;
 }
