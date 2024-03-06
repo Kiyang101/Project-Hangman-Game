@@ -67,7 +67,7 @@ class HangmanGame : public Player{
     public:
         HangmanGame(string w){
             secretWord = w;
-            lives = 6;
+            lives = 7;
             int wordLenght = secretWord.length();
             guessedWord = vector<char>(wordLenght, '_');
         };
