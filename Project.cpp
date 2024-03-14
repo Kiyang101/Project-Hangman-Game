@@ -154,11 +154,11 @@ void HangmanGame::play(){
     }
 
     if (secretWord == string(guessedWord.begin(), guessedWord.end())){
-        cout << "\n\nCongratulations "<< name << " Win!!\n\n";
+        cout << "\n\nCongratulations "<< name << ". You Win!!\n\n";
         cout << "The correct word is '" << secretWord << "'\n" << endl;
     }
     else{
-        cout << "\n\n" << name << " You lose" << endl;
+        cout << "\n\n" << name << " You lose. But it's ok you can try again." << endl;
         cout << "The correct word is '" << secretWord << "'\n" << endl;
     }
 }
